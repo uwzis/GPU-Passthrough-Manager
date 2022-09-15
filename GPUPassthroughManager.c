@@ -4,35 +4,31 @@
 #include <unistd.h>
 #include <stdbool.h>
 
-
-
-//load vfio driver
+// Load VFIO driver
 void vfiod(GtkWidget *vfio, gpointer data) {
-  
-    system("sudo sh ./Scripts/vfio.sh");//this will run first.sh and give it +x perms
+    system("sudo sh ./Scripts/vfio.sh"); // Run VFIO driver script
     system("systemctl reboot");
 }
 
-//load default drivers
+// Load default drivers
 void do_calculate(GtkWidget *calculate, gpointer data) {
-    system("sudo sh ./Scripts/Default.sh");//this will run first.sh and give it +x perms
-    system("systemctl reboot");
+    system("sudo sh ./Scripts/Default.sh"); // Run default GPU driver script
+    system("systemctl reboot"); 
 }
 
-//first time setup script for button start,
+// Run first time set up scripts
 void first(GtkWidget *payload, gpointer data){
-    system("sudo sh ./Scripts/first.sh");//this will run first.sh and give it +x perms
-    system("touch ./Scripts/IDs.txt");//reboots system
+    system("sudo sh ./Scripts/first.sh"); // Run first time setup script
+    system("touch ./Scripts/IDs.txt"); // Create IDs.txt file 
     system("systemctl reboot");
 }
-//MAN page github
+
+// Main GitHub page
 void reload(GtkWidget *clear, gpointer data){
-
-
     system("xdg-open https://github.com/uwzis/GPU-Passthrough-Manager");
 }
 
-//CSS
+// Load CSS for GTK
 static void load_css ( void ){
     GtkCssProvider *provider;
     GdkDisplay *display;
@@ -52,8 +48,7 @@ static void load_css ( void ){
     g_object_unref ( provider );
 }
 
-
-//toggle button functions,
+// toggle button functions,
 static void check_state(GtkWidget* widget, gpointer data)
 {
     if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
@@ -67,18 +62,16 @@ static void check_state(GtkWidget* widget, gpointer data)
     }
 }
 
-
 // gcc ./GPUPassthroughManager.c -o "GPU Passthrough Manager" `pkg-config --cflags --libs gtk+-3.0`
 int main(int argc, char **argv){
  
-
     //if IDs.txt doesnt exist, then start first time setup window, else, run program as normal
     int checkIfFileExists(const char *filename);
     if( access("./Scripts/IDs.txt", F_OK ) != -1){
-        system("rm ./Scripts/IDs.txt");//this will run first.sh and give it +x perms
-        system("chmod +x ./Scripts/scan.sh");
-        system("chmod +x ./Scripts/scanID.sh");//reboots system
-        system("sh ./Scripts/scanID.sh");
+        system("rm ./Scripts/IDs.txt"); // Delete existing IDs.txt
+        system("chmod +x ./Scripts/scan.sh"); // Modify FS permissions for scan.sh
+        system("chmod +x ./Scripts/scanID.sh"); // Modify FS permissions for scanID.sh
+        system("sh ./Scripts/scanID.sh"); // Run ID scanning script
         
         GtkWidget *window, *grid, *calculate, *vfio, *space, *gpu, *vbox, *toggle, *toggle2, *grid2, *label, *header, *clear;
         gtk_init(&argc, &argv);
@@ -93,30 +86,17 @@ int main(int argc, char **argv){
         vbox = gtk_box_new(TRUE, 1);
             gtk_container_add(GTK_CONTAINER(window), vbox);
 
-         
-
-//gpus menu scan and print to it
-        
-
-
-
-
-
-
+      ``// Scan and print
         label = gtk_label_new("Welcome to GPU Passthrough Manager\n");
           gtk_container_add(GTK_CONTAINER(vbox), label);
            gtk_box_pack_start(GTK_BOX(vbox), label, 0,1,1);
             gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_CENTER);
-
-
-
+      
 //if there is an ID, then print the name of the device
         toggle = gtk_toggle_button_new_with_mnemonic("NVIDIA Corporation GA102 3080TI [10de:1aef]");
             gtk_box_pack_start(GTK_BOX(vbox), toggle, 0,1,1);
 
             g_signal_connect(toggle, "toggled", G_CALLBACK(check_state), NULL);
-
-
 
         toggle2 = gtk_toggle_button_new_with_mnemonic("_Toggle 2");
             gtk_box_pack_start(GTK_BOX(vbox), toggle2, 0,1,1);
@@ -125,21 +105,16 @@ int main(int argc, char **argv){
             
 //end
 
-
-
         grid = gtk_fixed_new();
             
             gtk_container_add(GTK_CONTAINER(vbox), grid);
-           
-
- 
-        //default, i got inda lazy
+            
+        // Main window (for returning users)
         calculate = gtk_button_new_with_label("Load Default");
             g_signal_connect(calculate, "clicked", G_CALLBACK(do_calculate), NULL);
            
             gtk_fixed_put(GTK_FIXED(grid), calculate, 0, 200);
             gtk_widget_set_size_request(calculate, 200, 30);
-
 
         clear = gtk_button_new_with_label("Manual");
             g_signal_connect(clear, "clicked", G_CALLBACK(reload), NULL);
@@ -151,20 +126,19 @@ int main(int argc, char **argv){
             gtk_fixed_put(GTK_FIXED(grid), vfio, 350, 200);
             gtk_widget_set_size_request(vfio, 200, 30);
        
-
         gtk_widget_show_all(window);
         gtk_main();
     
         return 0;
     }
-    //first time setup if IDs.txt is not found in /Scripts
-    else{
+  
+    // First time setup window
+    else {
         GtkWidget *window, *grid, *payload, *label;
         gtk_init(&argc, &argv);
 
         load_css();
     
-
         window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
         gtk_window_set_default_size(GTK_WINDOW(window), 300, 10);
         
@@ -178,9 +152,6 @@ int main(int argc, char **argv){
         gtk_box_pack_start(GTK_BOX(grid), label, 0,1,1);
         gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_CENTER);
 
-
-
-
         payload = gtk_button_new_with_label("Start");
         g_signal_connect(payload, "clicked", G_CALLBACK(first), NULL);
         gtk_box_pack_start(GTK_BOX(grid), payload, 0,1,1);
@@ -188,8 +159,6 @@ int main(int argc, char **argv){
         gtk_widget_show_all(window);
         gtk_main();
 
-    
         return 0;
-    
     }
 }
