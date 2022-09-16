@@ -1,6 +1,5 @@
 # Import dependencies
-import sys
-import re
+import sys, re
 
 # Main function
 def main(_fp, _ln = None):   
