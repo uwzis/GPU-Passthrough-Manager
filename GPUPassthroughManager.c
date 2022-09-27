@@ -19,7 +19,7 @@ void do_calculate(GtkWidget *calculate, gpointer data) {
 // Run first time set up scripts
 void first(GtkWidget *payload, gpointer data){
     system("sudo sh ./Scripts/first.sh"); // Run first time setup script
-    system("touch ./Scripts/IDs.txt"); // Create IDs.txt file 
+    system("touch ./Scripts/Devices.txt"); // Create IDs.txt file 
     system("systemctl reboot");
 }
 
@@ -54,25 +54,30 @@ static void check_state(GtkWidget* widget, gpointer data)
     if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
     {
         //write to file
-        g_print("10de:aef1,10de:2039\n");
+        g_print("toggled\n");
+        system("python3 ./Tools/confmgr.py ./Scripts/vfio.conf add \"10de:2304\"");
+
     }else
     {   
         //delete from file
         g_print("Toggle button not activated\n");
+        system("python3 ./Tools/confmgr.py ./Scripts/vfio.conf remove \"10de:2304\"");
+
     }
 }
-
+//python3 ./Tools/confmgr.py ./Scripts/vfio.conf add "10de:2304"
 // gcc ./GPUPassthroughManager.c -o "GPU Passthrough Manager" `pkg-config --cflags --libs gtk+-3.0`
 int main(int argc, char **argv){
  
     //if IDs.txt doesnt exist, then start first time setup window, else, run program as normal
     int checkIfFileExists(const char *filename);
-    if( access("./Scripts/IDs.txt", F_OK ) != -1){
-        system("rm ./Scripts/IDs.txt"); // Delete existing IDs.txt
-        system("chmod +x ./Scripts/scan.sh"); // Modify FS permissions for scan.sh
-        system("chmod +x ./Scripts/scanID.sh"); // Modify FS permissions for scanID.sh
+    if( access("./Scripts/Devices.txt", F_OK ) != -1){
+        system("rm vfio.conf");
+        system("echo \"options vfio-pci ids=\" | tee -n ./Scripts/vfio.conf");
+        system("rm ./Scripts/Devices.txt | rm ./Tools/IDs.txt"); // Delete existing IDs.txt
         system("sh ./Scripts/scanID.sh"); // Run ID scanning script
-        
+        system("python3 ./Tools/idparse.py ./Scripts/Devices.txt | tee ./Tools/IDs.txt");
+        system("python3 ./Tools/nameparse.py ./Scripts/Devices.txt | tee ./Tools/Names.txt");
         GtkWidget *window, *grid, *calculate, *vfio, *space, *gpu, *vbox, *toggle, *toggle2, *grid2, *label, *header, *clear;
         gtk_init(&argc, &argv);
         load_css();
@@ -86,7 +91,7 @@ int main(int argc, char **argv){
         vbox = gtk_box_new(TRUE, 1);
             gtk_container_add(GTK_CONTAINER(window), vbox);
 
-      ``// Scan and print
+      // Scan and print
         label = gtk_label_new("Welcome to GPU Passthrough Manager\n");
           gtk_container_add(GTK_CONTAINER(vbox), label);
            gtk_box_pack_start(GTK_BOX(vbox), label, 0,1,1);
@@ -98,7 +103,7 @@ int main(int argc, char **argv){
 
             g_signal_connect(toggle, "toggled", G_CALLBACK(check_state), NULL);
 
-        toggle2 = gtk_toggle_button_new_with_mnemonic("_Toggle 2");
+        toggle2 = gtk_toggle_button_new_with_mnemonic("Intel Corporation CoffeeLake-H GT2 [UHD Graphics 630]");
             gtk_box_pack_start(GTK_BOX(vbox), toggle2, 0,1,1);
             
             g_signal_connect(toggle2, "toggled", G_CALLBACK(check_state), NULL);
