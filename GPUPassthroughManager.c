@@ -76,8 +76,8 @@ int main(int argc, char **argv){
         system("echo \"options vfio-pci ids=\" | tee -n ./Scripts/vfio.conf");
         system("rm ./Scripts/Devices.txt | rm ./Tools/IDs.txt"); // Delete existing IDs.txt
         system("sh ./Scripts/scanID.sh"); // Run ID scanning script
-        system("python3 ./Tools/idparse.py ./Scripts/Devices.txt | tee ./Tools/IDs.txt");
-        system("python3 ./Tools/nameparse.py ./Scripts/Devices.txt | tee ./Tools/Names.txt");
+        system("python3 ./Tools/pciparse.py ./Scripts/Devices.txt id | tee ./Tools/IDs.txt");
+        system("python3 ./Tools/pciparse.py ./Scripts/Devices.txt name | tee ./Tools/Names.txt");
         GtkWidget *window, *grid, *calculate, *vfio, *space, *gpu, *vbox, *toggle, *toggle2, *grid2, *label, *header, *clear;
         gtk_init(&argc, &argv);
         load_css();
