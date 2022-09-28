@@ -1,10 +1,6 @@
-# GPU Passthrough Manager
-A GUI based tool to aid in passing through graphics cards to virtual machines.
+# GPU Passthrough Manager (Python)
+[GPU Passthrough Manager](https://github.com/uwzis/GPU-Passthrough-Manager) by [uwzis](https://github.com/uwzis) is a GUI based utility to aid in passing through graphics devices to virtual machines. This repository is that program but written in entirely Python rather than C.
 
 **This program is only compatible with systems that support IOMMU.**
 
-## Build instructions
-1. ``git clone https://github.com/uwzis/GPU-Passthrough-Manager``
-2. ``gcc ./GPUPassthroughManager.c -o "GPU Passthrough Manager" pkg-config --cflags --libs gtk+-3.0``
-
-*(Makefile/build script coming soon)*
+*More information / documentation soon*
