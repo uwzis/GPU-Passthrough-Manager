@@ -45,4 +45,5 @@ class window(QWidget):
 
     # Button event handler
     def btnstate(self):
+        self.firstMessageButton.setEnabled(False)
         setup.main(self)
