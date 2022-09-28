@@ -1,32 +1,40 @@
 # Import dependencies
 import sys
-import os
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QLabel, QWidget
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 
-class window(QMainWindow):
-    def __init__(self):
-        super(window, self).__init__()
+# Define window constructor
+class window(QWidget):
+    def __init__(self, *args, **kwargs):
+        QWidget.__init__(self, *args, **kwargs)
+
+        # Set window contexts/values
+        self.setWindowTitle("GPU Passthrough Manager")
+        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
         
-        # Set window contexts        
-        self.setGeometry(50, 50, 500, 300)
-        self.setWindowTitle("GPUPassthroughManager")
-        self.layout = QVBoxLayout()
+        # Set layout
+        self.layout = QGridLayout()
 
-        # Create main GUI object
-        self.mainWidget = QWidget(self)
-        self.setCentralWidget(self.mainWidget)
-        self.mainWidget.setLayout(self.layout)
+        # Initialize GUI elements
+        self.firstMessageTitle = QLabel("Welcome to GPU Passthrough Manager!", self)
+        self.firstMessageTitle.setFont(QFont('default', 20))
+        
+        self.firstMessageBody = QLabel("This program is used for assisting in passing through graphics/audio devices to virtual machines. To begin, click the button below to run initial compatibility checks and configuration adjustments.")
+        self.firstMessageBody.setFont(QFont("default", 11))
+        self.firstMessageBody.setWordWrap(True)
 
-        # Create GUI contents
-        self.firstRunMessage = QLabel("Welcome to GPU Passthrough Manager")
-        self.layout.addWidget(self.firstRunMessage)
+        # Add GUI elements to layout
+        self.layout.addWidget(self.firstMessageTitle, 0, 0)
+        self.layout.addWidget(self.firstMessageBody, 1, 0)
 
         # Display window
+        self.setLayout(self.layout)
+        self.setFixedWidth(self.width())
         self.show()
-        
+
+# Prevent running from imports
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    GUI = window()
+    win = window()
     sys.exit(app.exec_())
-
-
