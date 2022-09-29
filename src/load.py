@@ -1,6 +1,9 @@
 # Import dependencies
 import sys, os, subprocess, re, json
 
+# Import local dependencies
+from src.gui.main import window as mainWindow
+
 def load(app):
     # Begin pre-initialization process
     print("Running pre-initialization process...")
@@ -44,3 +47,7 @@ def load(app):
         json.dump(data, f)
         f.close()
     
+    # Begin GUI initialization
+    print("Pre-initialization process completed successfully.")
+    win = mainWindow()
+    sys.exit(app.exec_())
