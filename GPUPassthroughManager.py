@@ -11,6 +11,6 @@ if __name__ == "__main__":
         app = QApplication(sys.argv)
         if not os.path.exists("./data.json"):
             win = introWindow()
-        sys.exit(app.exec_())
+            sys.exit(app.exec_())
     else:
         sys.exit("You must run GPU Passthrough Manager as root.")
