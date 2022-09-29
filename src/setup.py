@@ -43,5 +43,11 @@ class setup(object):
         # Rebuild system images
         print("Rebuilding system images...")
         os.system("mkinitcpio -p linux")
+
+        # Create data.json
+        print("Creating device configuration file...")
+        os.system("touch ./data.json")
+
+        # Reboot system
         print("Setup completed. Rebooting...")
         os.system("systemctl reboot -i")
