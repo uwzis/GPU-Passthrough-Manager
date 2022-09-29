@@ -47,6 +47,7 @@ class setup(object):
         # Create data.json
         print("Creating device configuration file...")
         os.system("touch ./data.json")
+        os.system("echo {} > data.json")
 
         # Reboot system
         print("Setup completed. Rebooting...")
