@@ -7,6 +7,10 @@ class DriverManager(object):
             if mode.lower() == "vfio":
                 print("Copying configuration file...")
                 os.system("cp ./vfio.conf /etc/modprobe.d/")
+                print("Rebuilding system images...")
+                os.system("mkinitcpio -P linux")
+                print("Rebooting...")
+                os.system("systemctl reboot -i")
             elif mode.lower() == "default":
                 print("Removing configuration file...")
                 os.system("rm /etc/modprobe.d/vfio.conf")
