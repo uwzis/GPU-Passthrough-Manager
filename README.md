@@ -1,5 +1,5 @@
 # GPU Passthrough Manager (Python)
-[GPU Passthrough Manager](https://github.com/uwzis/GPU-Passthrough-Manager) by [uwzis](https://github.com/uwzis) is a graphical interface utility to aid in passing through graphics devices to virtual machines. This version of GPU Passthrough Manager aims to match/exceed the functionality of the original, while being written in Python instead of C. Whereas the original program is designed for GTK, this program is designed for Qt. At some point in the future, this program will support both GTK and Qt.
+[GPU Passthrough Manager](https://github.com/uwzis/GPU-Passthrough-Manager) by [uwzis](https://github.com/uwzis) is a graphical interface utility to aid in passing through graphics devices to virtual machines. This version of GPU Passthrough Manager aims to match/exceed the functionality of the original, while being written in Python instead of C/C++. Whereas the original program is designed for GTK, this program is designed for Qt. At some point in the future, this program will support both GTK and Qt. This repository is the official Qt version of GPU Passthrough Manager.
 
 **This program is only compatible with systems that support IOMMU/virtualization.**
 ## Documentation
