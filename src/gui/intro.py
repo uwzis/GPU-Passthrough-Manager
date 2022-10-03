@@ -14,7 +14,7 @@ class window(QWidget):
         # Set window contexts/values
         self.setWindowTitle("GPU Passthrough Manager")
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
-        
+        self.setWindowIcon(QIcon("GPUPM.png"))
         
         # Set layout
         self.layout = QGridLayout()
