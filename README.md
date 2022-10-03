@@ -29,7 +29,7 @@ Once you have completed first time setup, or manually configured VFIO, you are r
 2. Once all the devices you wish to pass through are selected, click the `Load VFIO` button in the bottom right.
 3. Wait for GPU Passthrough Manager to load the driver and reboot your system.
 
-GPU Passthrough Manager creates a temporary `vfio.conf` file in the root directory of the program. **The contents of this file will reset everytime GPU Passthrough Manager is run.** PCI device IDs are automatically added to or removed from this file as they are selected/unselected within the program. This ensures only valid configuration files can be applied amd allows the `Load VFIO` button to do the following (in order):
+GPU Passthrough Manager creates a temporary `vfio.conf` file in the root directory of the program. **The contents of this file will reset everytime GPU Passthrough Manager is run.** PCI device IDs are automatically added to or removed from this file as they are selected/unselected within the program. This ensures only valid configuration files can be applied and allows the `Load VFIO` button to do the following (in order):
 - Copy the temporary `vfio.conf` to `/etc/modprobe.d/`.
 - Rebuild system images.
 - Reboot the system.
