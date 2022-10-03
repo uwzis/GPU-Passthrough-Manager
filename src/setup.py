@@ -1,5 +1,8 @@
 # Import dependencies
-import os, re
+import os
+
+# Import local dependencies
+from .prompt import prompt
 
 class setup(object):
     def main(self):
@@ -47,8 +50,8 @@ class setup(object):
         # Create data.json
         print("Creating device configuration file...")
         os.system("touch ./data.json")
-        os.system("echo {} > data.json")
+        os.system("echo '{}' > ./data.json")
 
         # Reboot system
-        print("Setup completed. Rebooting...")
-        os.system("systemctl reboot -i")
+        print("Setup completed. Prompting user for reboot")
+        prompt.rebootPrompt(self)
