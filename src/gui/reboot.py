@@ -11,9 +11,6 @@ class rebootWindow(QWidget):
         # Set layout
         self.layout = QGridLayout()
 
-        # Set window contexts
-        self.setWindowTitle("GPU Passthrough Manager")
-
         # Create rebooting message
         self.rebootMessage = QLabel("Configuration changes have been applied that require a reboot in order to take effect.")
         self.rebootMessage.setFont(QFont("default", 11))
