@@ -11,6 +11,7 @@ Run `Build.sh` in the program's directory to build the program.
 - make sure you have Intel VT-d or AMD Vi enabled in your bios.
 - more than one graphics device on the system. If you load vfio drivers to your host's main GPU, bad things will happen.
 #### Dependencies
+- '`RUN AS ROOT`
 - `GTK` is required for this version. see [QT version](https://github.com/89mpxf/GPU-Passthrough-Manager-Python) by 89mpxf
 - `Jsoncpp`
 - `python3`
