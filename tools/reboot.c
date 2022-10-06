@@ -16,7 +16,7 @@ int main(int argc, char **argv){
         gtk_window_set_resizable(GTK_WINDOW(window), FALSE);
         g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
     //set icon
-    pixbuf = gdk_pixbuf_new_from_file("../icons/GPUPM.png", NULL);
+    pixbuf = gdk_pixbuf_new_from_file("./icons/GPUPM.png", NULL);
         gtk_window_set_icon(GTK_WINDOW(window), pixbuf);
     //set grid for reboot button
     grid = gtk_box_new(TRUE, 1);
