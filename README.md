@@ -16,10 +16,10 @@ Run `Build.sh` in the program's directory to build the program.
 - `python3`
 
 ## First time configuration
-Once GPUPM is ran for the first time, it will prompt you run the first time setup. This Configures Grub bootloader to add IOMMU kernel parameter and adds VFIO modules to the system images. This rebuilds Grub bootloader and rebuilds system images. This required for the program to work right or things will really break. 
+Once GPUPM is runs for the first time, it will prompt you to run the first time setup. This Configures Grub bootloader to add IOMMU kernel parameter and adds VFIO modules to the system images. This rebuilds Grub bootloader and rebuilds system images. This is required for the program to work right or things will really break. 
 
 ## Documentation
-GPUPM works by loading drivers to the device the user selects. Select what devices you want to pass through, then press `Load VFIO`. Then restart when prompted to load the vfio drivers on the devices you have selected. When system is rebooted, you will have the drivers loaded. use `lspci -k'` to verify the vfio drivers are loaded. To load the default drivers, press the `Load Default` button to clear the config file of all devices.
+GPUPM works by loading drivers to the device the user selects. Select what devices you want to pass through, then press `Load VFIO`. Then restart when prompted to load the vfio drivers on the devices you have selected. When the system is rebooted, you will have the drivers loaded. use `lspci -k'` to verify the vfio drivers are loaded. To load the default drivers, press the `Load Default` button to clear the config file of all devices.
 
 The vfio config is stored at the programs directory as `vfio.conf`. This configuration is copied to `/etc/modprobe.d/` and replaces or creates the file there. If you pass through a device and your system does not boot, then you need to `chroot` into your system and delete the config file from modprobe.d, then rebuild your system images to make your system bootable again..
 
