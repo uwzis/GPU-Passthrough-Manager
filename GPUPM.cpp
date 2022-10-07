@@ -431,7 +431,7 @@ int checkIfFileExists(const char *filename);
                 gtk_container_add(GTK_CONTAINER(window), vbox);
             // Title
             label = gtk_label_new_with_mnemonic("null");
-                gtk_label_set_markup (GTK_LABEL (label), "<span font='18' background='black'>Welcome to GPU Passthrough Manager\n</span>");
+                gtk_label_set_markup (GTK_LABEL (label), "<span font='18'><b>Welcome to GPU Passthrough Manager\n</b></span>");
                 gtk_container_add(GTK_CONTAINER(vbox), label);
                 gtk_box_pack_start(GTK_BOX(vbox), label, 0,1,1);
                 gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_CENTER);
