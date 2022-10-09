@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ..
+
 echo "Setting up GPUPM"
 sudo mkdir -p /usr/share/gpu-passthrough-manager
 sudo install -Dm775 ./gpu-passthrough-manager /usr/bin/gpu-passthrough-manager
