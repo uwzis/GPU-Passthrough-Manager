@@ -1,9 +1,11 @@
 #!/bin/bash
 
 echo "Setting up GPUPM"
-sudo install -Dm775 ./gpu-passthrough-manager /usr/bin/gpu-passthrough-manager
-sudo install -Dm775 ./README.md /usr/share/doc/gpu-passthrough-manager/README.md
 sudo mkdir -p /usr/share/gpu-passthrough-manager
+
+sudo install -Dm775 ./gpu-passthrough-manager /usr/share/gpu-passthrough-manager/gpu-passthrough-manager
+sudo mv /usr/share/gpu-passthrough-manager/gpu-passthrough-manager /usr/bin/gpu-passthrough-manager
+sudo install -Dm775 ./README.md /usr/share/doc/gpu-passthrough-manager/README.md
 sudo install -Dm775 ./icons/GPU\ Passthrough\ Manager.desktop /usr/share/applications/GPU\ Passthrough\ Manager.desktop
 sudo install -Dm775 ./GPUPM /usr/share/gpu-passthrough-manager/GPUPM
 sudo install -Dm775 ./style.css /usr/share/gpu-passthrough-manager/style.css
