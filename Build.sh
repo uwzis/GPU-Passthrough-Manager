@@ -5,3 +5,4 @@ gcc ./tools/apphandler.c -o "gpu-passthrough-manager"
 rm ./GPUPM.cpp
 rm ./tools/reboot.c
 rm ./tools/apphandler.c
+rm ./Build.sh
