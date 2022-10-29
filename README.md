@@ -1,5 +1,7 @@
 # GPU Passthrough Manager
 
+[![Showcase Video](https://img.youtube.com/vi/ttMAGxJ4pUo/0.jpg)](https://youtu.be/ttMAGxJ4pUo)
+
 If you ever wanted to pass through your GPU to a virtual machine and wanted to do it quickly and easily, then I have a program for all of you "script kiddies" out there.
 
 GPU Passthrough Manager is a GUI application utilizing vfio drivers to quickly load your default and VFIO drivers with just a few clicks. passthrough a graphics devices to virtual machines is made easy now.
@@ -26,3 +28,5 @@ The vfio config is stored at the programs directory as `vfio.conf`. This configu
 
 #### Optimus Manager Users
 For people who use laptops with dedicated or external graphics cards, GPUPM can be used with [Optimus Manager](https://github.com/Askannz/optimus-manager) to throw your graphics card off of the pci bus. With hybrid mode, you can put it onto the bus using integrated graphics on the host while having your GPU on the bus to running in your virtual machine. This means your laptop has great battery life, with the capability to switch to your GPU to do rendering work on.
+
+
