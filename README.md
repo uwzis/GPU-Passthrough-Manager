@@ -6,7 +6,7 @@ If you ever wanted to pass through your GPU to a virtual machine and wanted to d
 
 GPU Passthrough Manager is a GUI application utilizing vfio drivers to quickly load your default and VFIO drivers with just a few clicks. passthrough a graphics devices to virtual machines is made easy now.
 
-Run `Build.sh` in the program's directory to build the program RUN IT AS ROOT.
+Run `build.sh` in the program's directory to build the program RUN IT AS ROOT.
 ## Requirements
 ### !WARNING!
 **This program is only compatible with systems that support IOMMU / Virtualization.**
@@ -14,8 +14,8 @@ Run `Build.sh` in the program's directory to build the program RUN IT AS ROOT.
 - more than one graphics device on the system. If you load vfio drivers to your host's main GPU, bad things will happen.
 #### Dependencies
 - `RUN AS ROOT`
-- `GTK` is required for this version. see [QT version](https://github.com/89mpxf/GPU-Passthrough-Manager-Python) by 89mpxf
-- `Jsoncpp`
+- `gtk` is required for this version. see [QT version](https://github.com/89mpxf/GPU-Passthrough-Manager-Python) by 89mpxf
+- `jsoncpp`
 - `python3`
 
 ## First time configuration
