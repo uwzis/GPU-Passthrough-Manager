@@ -29,7 +29,7 @@ int main(int argc, char **argv){
         gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_CENTER);
     //text
     para = gtk_label_new("null");
-        gtk_label_set_markup (GTK_LABEL (para), "<span font='11'>\nYour systems configuration has changed!\nPlease reboot system load new configuration\n\n</span>");
+        gtk_label_set_markup (GTK_LABEL (para), "<span font='11'>\nYour systems configuration has changed!\nPlease reboot your system to load the new configuration\n\n</span>");
         gtk_container_add(GTK_CONTAINER(grid), para);
         gtk_box_pack_start(GTK_BOX(grid), para, 0,1,1);
         gtk_label_set_justify(GTK_LABEL(para), GTK_JUSTIFY_CENTER);

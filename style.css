@@ -1,14 +1,12 @@
 
-label{
-    
-    font-family: "Monospace";
-    font-size: .9em;
-    
-    padding:15px;
-
+label {
+    font-family:    monospace;
+    font-size:      .9em;
+    padding:        15px;
 }
-window{
-    background-image: url("./icons/GPUPMBn.png");
-    background-repeat: no-repeat;
-    background-size: 100% 120%;
+
+window {
+    background-image:   url("./icons/GPUPMBn.png");
+    background-repeat:  no-repeat;
+    background-size:    100% 120%;
 }
