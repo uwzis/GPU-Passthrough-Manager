@@ -6,7 +6,7 @@ If you ever wanted to pass through your GPU to a virtual machine and wanted to d
 
 GPU Passthrough Manager is a GUI application utilizing vfio drivers to quickly load your default and VFIO drivers with just a few clicks. passthrough a graphics devices to virtual machines is made easy now.
 
-Run `Build.sh` in the program's directory to build the program. RUN GPUPM AS ROOT!
+Run `make` in the program's directory to build the program. RUN GPUPM AS ROOT!
 ## Requirements
 ### !WARNING!
 **This program is only compatible with systems that support IOMMU / Virtualization.**
