@@ -6,9 +6,8 @@ ifneq ($(shell eval 'echo -e'),-e)
 	<< += -e
 endif
 
-all: tools gpupm apphandler
-
-tools:
+all: reboot gpupm apphandler
+reboot:
 	$(<<) "  CC\ttools/reboot.c"
 	@$(CC) tools/reboot.c -o tools/Reboot `pkg-config --cflags --libs gtk+-3.0`
 
