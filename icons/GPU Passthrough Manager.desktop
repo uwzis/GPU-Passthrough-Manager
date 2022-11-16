@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=GPU Passthrough Manager
+Comment=GPU passthrough made easy.
+Exec=sudo gpu-passthrough-manager
+Icon=/usr/share/gpu-passthrough-manager/icons/GPUPM.png
+Path=
+Terminal=true
+StartupNotify=false
