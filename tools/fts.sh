@@ -71,6 +71,7 @@ if [ -f "$MKINIT" ]; then
 		echo "vfio module already added"
 	else
 		sed -i 's/MODULES="/&vfio /' /etc/mkinitcpio.conf
+		sed -i 's/MODULES=(/&vfio /' /etc/mkinitcpio.conf
 		echo "added vfio module"
 		x=1
 	fi
@@ -79,6 +80,7 @@ if [ -f "$MKINIT" ]; then
 	    echo "vfio_iommu_type1 module already added"
 	else	
 	    sed -i 's/MODULES="/&vfio_iommu_type1 /' /etc/mkinitcpio.conf
+	    sed -i 's/MODULES=(/&vfio_iommu_type1 /' /etc/mkinitcpio.conf
 	    echo "added vfio_iommu_type1 module"
 		x=1
 	fi
@@ -87,6 +89,7 @@ if [ -f "$MKINIT" ]; then
 	    echo "vfio_virqfd module already added"
 	else	
 	    sed -i 's/MODULES="/&vfio_virqfd /' /etc/mkinitcpio.conf
+	    sed -i 's/MODULES=(/&vfio_virqfd /' /etc/mkinitcpio.conf
 	    echo "added vfio_vriqfd module"
 		x=1
 	fi
@@ -95,6 +98,7 @@ if [ -f "$MKINIT" ]; then
 	   echo "vfio_pci module already added"
 	else	
 	    sed -i 's/MODULES="/&vfio_pci /' /etc/mkinitcpio.conf
+	    sed -i 's/MODULES=(/&vfio_pci /' /etc/mkinitcpio.conf
 	    echo "added vfio_pci module"
 		x=1
 	fi
