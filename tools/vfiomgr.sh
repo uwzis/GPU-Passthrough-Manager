@@ -10,3 +10,7 @@ MKINIT=/etc/mkinitcpio.conf
 if [ -f "$MKINIT" ]; then
 	mkinitcpio -P linux
 fi
+DRACUT=/etc/dracut.conf
+if [ -f "$DRACUT" ]; then
+	dracut -f
+fi
