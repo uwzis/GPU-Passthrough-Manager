@@ -161,3 +161,11 @@ if [ -f "$INITRAM" ]; then
 		echo "initramfs already configured"
 	fi
 fi
+
+# Dracut VFIO hooks
+DRACUT=/etc/dracut.conf
+if [ -f "$DRACUT" ]; then
+	echo "Writing /etc/dracut.conf.d/10-vfio.conf..."
+	echo 'force_drivers+= "vfio-pci vfio vfio_iommu_type1 vfio_virqfd"' >> /etc/dracut.conf.d/10-vfio.conf
+	dracut -f
+fi
