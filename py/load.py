@@ -26,7 +26,7 @@ def load():
 
     # Get device data
     print("Gathering device data...")
-    lspci_res = subprocess.check_output("lspci -nn | grep -E 'Audio device|VGA'", shell=True).decode("utf-8").splitlines()
+    lspci_res = subprocess.check_output("lspci -nn | grep -iE 'Audio device|VGA'", shell=True).decode("utf-8").splitlines()
     
     # Prepare device data cache
     print(f"Found {len(lspci_res)} devices. Preparing data.json payload...")
