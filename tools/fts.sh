@@ -162,10 +162,35 @@ if [ -f "$INITRAM" ]; then
 	fi
 fi
 
+
+
 # Dracut VFIO hooks
 DRACUT=/etc/dracut.conf
+update_dracut_image() {
+
+	DISTRO=$(lsb_release -is)
+
+	# EndeavourOS needs special command
+	if [ "$DISTRO" = "EndeavourOS" ]; then
+
+		# If user has grub
+		if [ -f "$GRUB" ]; then
+			dracut-rebuild
+		fi
+
+		# If user has systemd-boot
+		if [ -f "$SYSD" ]; then
+			reinstall-kernels
+		fi
+	
+	# default way
+	else 
+		dracut -f
+	fi 
+}
 if [ -f "$DRACUT" ]; then
 	echo "Writing /etc/dracut.conf.d/10-vfio.conf..."
-	echo 'force_drivers+= "vfio-pci vfio vfio_iommu_type1 vfio_virqfd"' >> /etc/dracut.conf.d/10-vfio.conf
-	dracut -f
+	echo 'force_drivers+=" vfio-pci vfio vfio_iommu_type1 vfio_virqfd "' > /etc/dracut.conf.d/10-vfio.conf
+
+	update_dracut_image
 fi
