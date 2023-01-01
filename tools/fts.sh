@@ -189,8 +189,9 @@ update_dracut_image() {
 	fi 
 }
 if [ -f "$DRACUT" ]; then
-	echo "Writing /etc/dracut.conf.d/10-vfio.conf..."
-	echo 'force_drivers+=" vfio-pci vfio vfio_iommu_type1 vfio_virqfd "' > /etc/dracut.conf.d/10-vfio.conf
+	DRACUT_DESTINATION=/etc/dracut.conf.d/10-vfio.conf
+	echo "Writing to $DRACUT_DESTINATION..."
+	echo 'force_drivers+=" vfio-pci vfio vfio_iommu_type1 vfio_virqfd "' > $DRACUT_DESTINATION
 
 	update_dracut_image
 fi
