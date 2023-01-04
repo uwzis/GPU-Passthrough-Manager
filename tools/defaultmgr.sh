@@ -10,7 +10,32 @@ MKINIT=/etc/mkinitcpio.conf
 if [ -f "$MKINIT" ]; then
 	mkinitcpio -P linux
 fi
+
 DRACUT=/etc/dracut.conf
+update_dracut_image() {
+
+	DISTRO=$(lsb_release -is)
+
+	# EndeavourOS needs special command
+	if [ "$DISTRO" = "EndeavourOS" ]; then
+
+		# If user has grub
+		GRUB=/etc/default/grub
+		if [ -f "$GRUB" ]; then
+			dracut-rebuild
+		fi
+
+		# If user has systemd-boot
+		SYSD=/boot/loader/loader.conf
+		if [ -f "$SYSD" ]; then
+			reinstall-kernels
+		fi
+	
+	# default way
+	else 
+		dracut -f
+	fi 
+}
 if [ -f "$DRACUT" ]; then
-	dracut -f
+	update_dracut_image
 fi

@@ -174,11 +174,13 @@ update_dracut_image() {
 	if [ "$DISTRO" = "EndeavourOS" ]; then
 
 		# If user has grub
+		GRUB=/etc/default/grub
 		if [ -f "$GRUB" ]; then
 			dracut-rebuild
 		fi
 
 		# If user has systemd-boot
+		SYSD=/boot/loader/loader.conf
 		if [ -f "$SYSD" ]; then
 			reinstall-kernels
 		fi
