@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Get this script's directory
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 echo "Copying configuration file..."
 cp ./vfio.conf /etc/modprobe.d/
 echo "Rebuilding system images..."
@@ -11,6 +15,7 @@ if [ -f "$MKINIT" ]; then
 	mkinitcpio -P linux
 fi
 DRACUT=/etc/dracut.conf
+source $SCRIPT_DIR/dracut-utils
 if [ -f "$DRACUT" ]; then
-	dracut -f
+	update_dracut_image
 fi

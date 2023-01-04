@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Get this script's directory
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 i=0
 #Add IOMMU to GRUB conf, then make the config.
 GRUB=/etc/default/grub
@@ -166,28 +170,7 @@ fi
 
 # Dracut VFIO hooks
 DRACUT=/etc/dracut.conf
-update_dracut_image() {
-
-	DISTRO=$(lsb_release -is)
-
-	# EndeavourOS needs special command
-	if [ "$DISTRO" = "EndeavourOS" ]; then
-
-		# If user has grub
-		if [ -f "$GRUB" ]; then
-			dracut-rebuild
-		fi
-
-		# If user has systemd-boot
-		if [ -f "$SYSD" ]; then
-			reinstall-kernels
-		fi
-	
-	# default way
-	else 
-		dracut -f
-	fi 
-}
+source $SCRIPT_DIR/dracut-utils
 if [ -f "$DRACUT" ]; then
 	DRACUT_DESTINATION=/etc/dracut.conf.d/10-vfio.conf
 	echo "Writing to $DRACUT_DESTINATION..."
