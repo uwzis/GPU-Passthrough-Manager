@@ -2,9 +2,7 @@
 
 update_dracut_image() {
 
-	DISTRO=$(lsb_release -is)
-
-    kdialog --password "Hello"    
+	DISTRO=$(lsb_release -is)    
 
 	# EndeavourOS needs special command
 	if [ "$DISTRO" = "EndeavourOS" ]; then
