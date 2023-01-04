@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Get this script's directory
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 echo "Removing configuration file..."
 rm /etc/modprobe.d/vfio.conf
 echo "Rebuilding system images..."
@@ -12,30 +16,7 @@ if [ -f "$MKINIT" ]; then
 fi
 
 DRACUT=/etc/dracut.conf
-update_dracut_image() {
-
-	DISTRO=$(lsb_release -is)
-
-	# EndeavourOS needs special command
-	if [ "$DISTRO" = "EndeavourOS" ]; then
-
-		# If user has grub
-		GRUB=/etc/default/grub
-		if [ -f "$GRUB" ]; then
-			dracut-rebuild
-		fi
-
-		# If user has systemd-boot
-		SYSD=/boot/loader/loader.conf
-		if [ -f "$SYSD" ]; then
-			reinstall-kernels
-		fi
-	
-	# default way
-	else 
-		dracut -f
-	fi 
-}
+source $SCRIPT_DIR/dracut-utils
 if [ -f "$DRACUT" ]; then
 	update_dracut_image
 fi
