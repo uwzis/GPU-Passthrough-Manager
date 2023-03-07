@@ -9,6 +9,9 @@ using namespace std;
 void returns(){
     exit(0);
 }
+void settings(GtkWidget *settingsMan, gpointer data) {
+    system("./tools/Settings");
+}
 // Run first time set up scripts
 void first(GtkWidget *payload, gpointer data){
     system("sh ./tools/fts.sh"); // Run first time setup script
@@ -77,7 +80,7 @@ int checkIfFileExists(const char *filename);
         if( access("./data.json", F_OK ) != -1){
             system("python ./py/load.py");
             //initiate gtk widgets
-            GtkWidget *window, *grid, *para, *default1, *vfio, *vbox, *label, *text;
+            GtkWidget *window, *grid, *para, *default1, *vfio, *vbox, *label, *text, *settingsMan;
             GdkPixbuf *pixbuf;
             gtk_init(&argc, &argv);
             load_css();
@@ -92,6 +95,8 @@ int checkIfFileExists(const char *filename);
             vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
                 gtk_container_add(GTK_CONTAINER(window), vbox);
             // Title
+
+
             label = gtk_label_new_with_mnemonic("null");
                 gtk_label_set_markup (GTK_LABEL (label), "<span font='18'><b>Welcome to GPU Passthrough Manager\n</b></span>");
                 gtk_container_add(GTK_CONTAINER(vbox), label);
@@ -109,29 +114,58 @@ int checkIfFileExists(const char *filename);
             Json::Reader reader;
             reader.parse(file, actualJson);
             file.close();
-            //itterate buttons for the length of the devices in data.json
-            for (int i = 0; i < actualJson["devices"].size(); i++) {
-                GtkWidget *toggle[i];
-                toggle[i] = gtk_toggle_button_new_with_label(actualJson["devices"][i]["name"].asString().c_str());
-                gtk_box_pack_start(GTK_BOX(vbox), toggle[i], 0,1,1);
-                int* idx = new int;
-                *idx = i;
-                g_signal_connect_data(toggle[i], "toggled", G_CALLBACK(check_state), (gpointer*) idx, (GClosureNotify)free, (GConnectFlags) 0);
-                g_print("device %i button created\n", i + 1);
+            //itterate buttons for the length of the devices in data.json   
+                  
+            if (actualJson["devices"].size() > 0){
+                GtkWidget *scroll, *boxy;
+                    scroll = gtk_scrolled_window_new(NULL, NULL);
+                    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+                    gtk_container_add(GTK_CONTAINER(vbox), scroll);
+                    boxy = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+                    gtk_container_add(GTK_CONTAINER(scroll), boxy);
+                    //size of scroll
+                    gtk_widget_set_size_request(scroll, 400, 330);
+
+                for (int i = 0; i < actualJson["devices"].size(); i++) {
+                    GtkWidget *toggle[i];
+
+                    toggle[i] = gtk_toggle_button_new_with_label(actualJson["devices"][i]["name"].asString().c_str());
+                    gtk_box_pack_start(GTK_BOX(boxy), toggle[i], 0,1,1);
+                    int* idx = new int;
+                    *idx = i;
+                    g_signal_connect_data(toggle[i], "toggled", G_CALLBACK(check_state), (gpointer*) idx, (GClosureNotify)free, (GConnectFlags) 0);
+                    g_print("device %i button created\n", i + 1);
+                    }
+                }else{
+                    for (int i = 0; i < actualJson["devices"].size(); i++) {
+                    GtkWidget *toggle[i];
+                    toggle[i] = gtk_toggle_button_new_with_label(actualJson["devices"][i]["name"].asString().c_str());
+                    gtk_box_pack_start(GTK_BOX(vbox), toggle[i], 0,1,1);
+                    int* idx = new int;
+                    *idx = i;
+                    g_signal_connect_data(toggle[i], "toggled", G_CALLBACK(check_state), (gpointer*) idx, (GClosureNotify)free, (GConnectFlags) 0);
+                    g_print("device %i button created\n", i + 1);
+                }   
             }
+
             //makes grid for buttons Load Default and Load VFIO
             grid = gtk_fixed_new();
                 gtk_container_add(GTK_CONTAINER(vbox), grid);
             // Load Default
             default1 = gtk_button_new_with_label("Load Default");
                 g_signal_connect(default1, "clicked", G_CALLBACK(defaultd), NULL);
-                gtk_fixed_put(GTK_FIXED(grid), default1, 0, 400);
+                gtk_fixed_put(GTK_FIXED(grid), default1, 0, 300);
                 gtk_widget_set_size_request(default1, 250, 30);
             // Load VFIO
             vfio = gtk_button_new_with_label("Load VFIO");
                 g_signal_connect(vfio, "clicked", G_CALLBACK(vfiod), NULL);
-                gtk_fixed_put(GTK_FIXED(grid), vfio, 400, 400);
+                gtk_fixed_put(GTK_FIXED(grid), vfio, 400, 300);
+            //get window resloution at runtime
+
+
+
                 gtk_widget_set_size_request(vfio, 250, 30);
+
             //show all widgets
             gtk_widget_show_all(window);
             gtk_main();
