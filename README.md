@@ -13,7 +13,7 @@ Run `make` in the program's directory to build the program. RUN GPUPM AS ROOT!
 - make sure you have Intel VT-d or AMD Vi enabled in your bios.
 - more than one graphics device on the system. If you load vfio drivers to your host's main GPU, bad things will happen.
 #### Dependencies
-- `gtk` is required for this version. see [QT version](https://github.com/89mpxf/GPU-Passthrough-Manager-Python) by 89mpxf
+- `gtk` is required for this version. see [QT version](https://github.com/89mpxf/GPU-Passthrough-Manager-qt) by 89mpxf
 - `polkit`
 - `jsoncpp`
 - `python3`
