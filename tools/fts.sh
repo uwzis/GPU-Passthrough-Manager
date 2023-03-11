@@ -88,15 +88,6 @@ if [ -f "$MKINIT" ]; then
 	    echo "added vfio_iommu_type1 module"
 		x=1
 	fi
-	if grep -q vfio_virqfd "/etc/mkinitcpio.conf"
-	then
-	    echo "vfio_virqfd module already added"
-	else	
-	    sed -i 's/MODULES="/&vfio_virqfd /' /etc/mkinitcpio.conf
-	    sed -i 's/MODULES=(/&vfio_virqfd /' /etc/mkinitcpio.conf
-	    echo "added vfio_vriqfd module"
-		x=1
-	fi
 	if grep -q vfio_pci "/etc/mkinitcpio.conf"
 	then
 	   echo "vfio_pci module already added"
