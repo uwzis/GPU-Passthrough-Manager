@@ -165,7 +165,7 @@ source $SCRIPT_DIR/dracut-utils
 if [ -f "$DRACUT" ]; then
 	DRACUT_DESTINATION=/etc/dracut.conf.d/10-vfio.conf
 	echo "Writing to $DRACUT_DESTINATION..."
-	echo 'force_drivers+=" vfio-pci vfio vfio_iommu_type1 vfio_virqfd "' > $DRACUT_DESTINATION
+	echo 'force_drivers+=" vfio-pci vfio vfio_iommu_type1 "' > $DRACUT_DESTINATION
 
 	update_dracut_image
 fi
